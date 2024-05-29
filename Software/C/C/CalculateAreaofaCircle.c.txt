@@ -1,0 +1,12 @@
+/* Program 26: Calculate Area of a Circle */
+#include <stdio.h>
+#define PI 3.14159
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    double radius, area;
+    printf("Enter the radius of a circle: ");
+    scanf("%lf", &radius);
+    area = PI * radius * radius;
+    printf("Area of the circle: %.2lf\n", area);
+    return 0;
+}

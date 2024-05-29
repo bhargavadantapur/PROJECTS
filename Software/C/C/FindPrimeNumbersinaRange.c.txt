@@ -1,0 +1,24 @@
+/* Program 77: Find Prime Numbers in a Range */
+#include <stdio.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int checkPrime(int n);
+int main() {
+    int low, high;
+    printf("Enter two numbers (intervals): ");
+    scanf("%d %d", &low, &high);
+    printf("Prime numbers between %d and %d are: ", low, high);
+    for (int i = low; i <= high; ++i) {
+        if (checkPrime(i) == 1) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+    return 0;
+}
+int checkPrime(int n) {
+    if (n <= 1) return 0;
+    for (int i = 2; i <= n / 2; ++i) {
+        if (n % i == 0) return 0;
+    }
+    return 1;
+}

@@ -1,0 +1,17 @@
+/* Program 53: Calculate Sum of Natural Numbers Using Recursion */
+#include <stdio.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int sum(int n);
+int main() {
+    int num;
+    printf("Enter a positive integer: ");
+    scanf("%d", &num);
+    printf("Sum = %d\n", sum(num));
+    return 0;
+}
+int sum(int n) {
+    if (n != 0)
+        return n + sum(n - 1);
+    else
+        return n;
+}

@@ -1,0 +1,11 @@
+/* Program 37: Calculate Volume of a Cuboid */
+#include <stdio.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    double length, width, height, volume;
+    printf("Enter the length, width and height of the cuboid: ");
+    scanf("%lf %lf %lf", &length, &width, &height);
+    volume = length * width * height;
+    printf("Volume of the cuboid: %.2lf\n", volume);
+    return 0;
+}

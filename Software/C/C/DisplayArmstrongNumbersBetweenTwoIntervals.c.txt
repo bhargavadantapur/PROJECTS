@@ -1,0 +1,31 @@
+/* Program 52: Display Armstrong Numbers Between Two Intervals */
+#include <stdio.h>
+#include <math.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    int low, high, num, originalNum, remainder, n;
+    float result;
+    printf("Enter two numbers (intervals): ");
+    scanf("%d %d", &low, &high);
+    printf("Armstrong numbers between %d and %d are: ", low, high);
+    for (int i = low + 1; i < high; ++i) {
+        n = 0;
+        result = 0.0;
+        num = i;
+        originalNum = i;
+        while (originalNum != 0) {
+            originalNum /= 10;
+            ++n;
+        }
+        originalNum = i;
+        while (originalNum != 0) {
+            remainder = originalNum % 10;
+            result += pow(remainder, n);
+            originalNum /= 10;
+        }
+        if ((int)result == i) {
+            printf("%d ", i);
+        }
+    }
+    return 0;
+}
