@@ -1,0 +1,11 @@
+/* Program 28: Calculate Area of a Triangle */
+#include <stdio.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    double base, height, area;
+    printf("Enter the base and height of the triangle: ");
+    scanf("%lf %lf", &base, &height);
+    area = 0.5 * base * height;
+    printf("Area of the triangle: %.2lf\n", area);
+    return 0;
+}

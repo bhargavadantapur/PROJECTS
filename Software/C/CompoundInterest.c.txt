@@ -1,0 +1,13 @@
+/* Program 33: Calculate Compound Interest */
+#include <stdio.h>
+#include <math.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    double principal, rate, time, compoundInterest;
+    int n;
+    printf("Enter principal, rate of interest, time and number of times interest applied per time period: ");
+    scanf("%lf %lf %lf %d", &principal, &rate, &time, &n);
+    compoundInterest = principal * pow((1 + rate / (n * 100)), n * time);
+    printf("Compound Interest: %.2lf\n", compoundInterest);
+    return 0;
+}

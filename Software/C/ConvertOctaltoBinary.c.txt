@@ -1,0 +1,34 @@
+/* Program 63: Convert Octal to Binary */
+#include <stdio.h>
+#include <math.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int convertOctalToDecimal(int octalNumber);
+long long convertDecimalToBinary(int decimalNumber);
+int main() {
+    int octalNumber;
+    printf("Enter an octal number: ");
+    scanf("%d", &octalNumber);
+    int decimalNumber = convertOctalToDecimal(octalNumber);
+    printf("%d in octal = %lld in binary\n", octalNumber, convertDecimalToBinary(decimalNumber));
+    return 0;
+}
+int convertOctalToDecimal(int octalNumber) {
+    int decimalNumber = 0, i = 0;
+    while (octalNumber != 0) {
+        decimalNumber += (octalNumber % 10) * pow(8, i);
+        ++i;
+        octalNumber /= 10;
+    }
+    return decimalNumber;
+}
+long long convertDecimalToBinary(int decimalNumber) {
+    long long binaryNumber = 0;
+    int remainder, i = 1;
+    while (decimalNumber != 0) {
+        remainder = decimalNumber % 2;
+        decimalNumber /= 2;
+        binaryNumber += remainder * i;
+        i *= 10;
+    }
+    return binaryNumber;
+}

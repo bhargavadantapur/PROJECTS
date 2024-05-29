@@ -1,0 +1,12 @@
+/* Program 40: Calculate Volume of a Sphere */
+#include <stdio.h>
+#define PI 3.14159
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    double radius, volume;
+    printf("Enter the radius of the sphere: ");
+    scanf("%lf", &radius);
+    volume = (4.0/3.0) * PI * radius * radius * radius;
+    printf("Volume of the sphere: %.2lf\n", volume);
+    return 0;
+}

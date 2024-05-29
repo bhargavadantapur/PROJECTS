@@ -1,0 +1,42 @@
+/* Program 82: Convert Binary Number to Hexadecimal */
+#include <stdio.h>
+#include <math.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int convertBinaryToDecimal(long long n);
+void convertDecimalToHexadecimal(int n);
+int main() {
+    long long n;
+    printf("Enter a binary number: ");
+    scanf("%lld", &n);
+    int decimalNumber = convertBinaryToDecimal(n);
+    printf("Binary number %lld in hexadecimal = ", n);
+    convertDecimalToHexadecimal(decimalNumber);
+    printf("\n");
+    return 0;
+}
+int convertBinaryToDecimal(long long n) {
+    int decimalNumber = 0, i = 0;
+    while (n != 0) {
+        decimalNumber += (n % 10) * pow(2, i);
+        ++i;
+        n /= 10;
+    }
+    return decimalNumber;
+}
+void convertDecimalToHexadecimal(int n) {
+    char hex[100];
+    int i = 0;
+    while (n != 0) {
+        int temp = n % 16;
+        if (temp < 10) {
+            hex[i] = temp + 48;
+        } else {
+            hex[i] = temp + 55;
+        }
+        i++;
+        n /= 16;
+    }
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%c", hex[j]);
+    }
+}
