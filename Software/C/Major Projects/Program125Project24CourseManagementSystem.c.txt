@@ -1,0 +1,77 @@
+/* Program 125 | Project 24: Course Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Course {
+    int id;
+    char name[100];
+    char instructor[100];
+    int duration;
+};
+
+void addCourse(struct Course *courses, int *count) {
+    printf("Enter course ID: ");
+    scanf("%d", &courses[*count].id);
+    printf("Enter course name: ");
+    scanf("%s", courses[*count].name);
+    printf("Enter instructor name: ");
+    scanf("%s", courses[*count].instructor);
+    printf("Enter course duration (in weeks): ");
+    scanf("%d", &courses[*count].duration);
+    (*count)++;
+    printf("Course added successfully.\n");
+}
+
+void displayCourses(struct Course *courses, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Course ID: %d\n", courses[i].id);
+        printf("Name: %s\n", courses[i].name);
+        printf("Instructor: %s\n", courses[i].instructor);
+        printf("Duration: %d weeks\n", courses[i].duration);
+    }
+}
+
+void updateDuration(struct Course *courses, int count) {
+    int id, duration;
+    printf("Enter course ID to update duration: ");
+    scanf("%d", &id);
+    for (int i = 0; i < count; ++i) {
+        if (courses[i].id == id) {
+            printf("Enter new duration (in weeks): ");
+            scanf("%d", &duration);
+            courses[i].duration = duration;
+            printf("Duration updated successfully.\n");
+            return;
+        }
+    }
+    printf("Course not found.\n");
+}
+
+int main() {
+    struct Course courses[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Course\n2. Display Courses\n3. Update Duration\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addCourse(courses, &count);
+                break;
+            case 2:
+                displayCourses(courses, count);
+                break;
+            case 3:
+                updateDuration(courses, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

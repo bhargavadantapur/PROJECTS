@@ -1,0 +1,70 @@
+/* Program 114 | Project 13: Bus Reservation System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Seat {
+    int seatNumber;
+    char passengerName[100];
+    int reserved;
+};
+
+void reserveSeat(struct Seat *seats, int *count) {
+    printf("Enter seat number: ");
+    scanf("%d", &seats[*count].seatNumber);
+    printf("Enter passenger name: ");
+    scanf("%s", seats[*count].passengerName);
+    seats[*count].reserved = 1;
+    (*count)++;
+    printf("Seat reserved successfully.\n");
+}
+
+void displaySeats(struct Seat *seats, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Seat Number: %d\n", seats[i].seatNumber);
+        printf("Passenger Name: %s\n", seats[i].passengerName);
+        printf("Reserved: %s\n", seats[i].reserved ? "Yes" : "No");
+    }
+}
+
+void cancelReservation(struct Seat *seats, int count) {
+    int seatNumber;
+    printf("Enter seat number to cancel reservation: ");
+    scanf("%d", &seatNumber);
+    for (int i = 0; i < count; ++i) {
+        if (seats[i].seatNumber == seatNumber && seats[i].reserved) {
+            seats[i].reserved = 0;
+            printf("Reservation cancelled successfully.\n");
+            return;
+        }
+    }
+    printf("Seat not found or reservation already cancelled.\n");
+}
+
+int main() {
+    struct Seat seats[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Reserve Seat\n2. Display Seats\n3. Cancel Reservation\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                reserveSeat(seats, &count);
+                break;
+            case 2:
+                displaySeats(seats, count);
+                break;
+            case 3:
+                cancelReservation(seats, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

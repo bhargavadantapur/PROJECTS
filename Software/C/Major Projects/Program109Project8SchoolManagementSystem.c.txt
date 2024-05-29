@@ -1,0 +1,86 @@
+/* Program 109 | Project 8: School Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    char name[100];
+    int rollNumber;
+    float marks;
+};
+
+struct Teacher {
+    char name[100];
+    int id;
+    char subject[100];
+};
+
+void addStudent(struct Student *students, int *count) {
+    printf("Enter student name: ");
+    scanf("%s", students[*count].name);
+    printf("Enter roll number: ");
+    scanf("%d", &students[*count].rollNumber);
+    printf("Enter marks: ");
+    scanf("%f", &students[*count].marks);
+    (*count)++;
+    printf("Student added successfully.\n");
+}
+
+void displayStudents(struct Student *students, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Roll Number: %d\n", students[i].rollNumber);
+        printf("Name: %s\n", students[i].name);
+        printf("Marks: %.2f\n", students[i].marks);
+    }
+}
+
+void addTeacher(struct Teacher *teachers, int *count) {
+    printf("Enter teacher name: ");
+    scanf("%s", teachers[*count].name);
+    printf("Enter teacher ID: ");
+    scanf("%d", &teachers[*count].id);
+    printf("Enter subject: ");
+    scanf("%s", teachers[*count].subject);
+    (*count)++;
+    printf("Teacher added successfully.\n");
+}
+
+void displayTeachers(struct Teacher *teachers, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Teacher ID: %d\n", teachers[i].id);
+        printf("Name: %s\n", teachers[i].name);
+        printf("Subject: %s\n", teachers[i].subject);
+    }
+}
+
+int main() {
+    struct Student students[100];
+    struct Teacher teachers[100];
+    int choice, studentCount = 0, teacherCount = 0;
+
+    while (1) {
+        printf("\n1. Add Student\n2. Display Students\n3. Add Teacher\n4. Display Teachers\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addStudent(students, &studentCount);
+                break;
+            case 2:
+                displayStudents(students, studentCount);
+                break;
+            case 3:
+                addTeacher(teachers, &teacherCount);
+                break;
+            case 4:
+                displayTeachers(teachers, teacherCount);
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

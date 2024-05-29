@@ -1,0 +1,73 @@
+/* Program 102 | Project 1: Simple Banking System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct BankAccount {
+    char accountHolder[100];
+    int accountNumber;
+    float balance;
+};
+
+void createAccount(struct BankAccount *account) {
+    printf("Enter account holder name: ");
+    scanf("%s", account->accountHolder);
+    printf("Enter account number: ");
+    scanf("%d", &account->accountNumber);
+    account->balance = 0.0;
+    printf("Account created successfully.\n");
+}
+
+void deposit(struct BankAccount *account, float amount) {
+    account->balance += amount;
+    printf("Deposit successful. New balance: %.2f\n", account->balance);
+}
+
+void withdraw(struct BankAccount *account, float amount) {
+    if (amount > account->balance) {
+        printf("Insufficient balance!\n");
+    } else {
+        account->balance -= amount;
+        printf("Withdrawal successful. New balance: %.2f\n", account->balance);
+    }
+}
+
+void checkBalance(struct BankAccount *account) {
+    printf("Current balance: %.2f\n", account->balance);
+}
+
+int main() {
+    struct BankAccount account;
+    int choice;
+    float amount;
+
+    while (1) {
+        printf("\n1. Create Account\n2. Deposit\n3. Withdraw\n4. Check Balance\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                createAccount(&account);
+                break;
+            case 2:
+                printf("Enter amount to deposit: ");
+                scanf("%f", &amount);
+                deposit(&account, amount);
+                break;
+            case 3:
+                printf("Enter amount to withdraw: ");
+                scanf("%f", &amount);
+                withdraw(&account, amount);
+                break;
+            case 4:
+                checkBalance(&account);
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

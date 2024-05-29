@@ -1,0 +1,60 @@
+/* Program 138 | Major Project 37: Hotel Management System */
+/* This program manages hotel reservations, room availability, etc. */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_ROOMS 50
+
+struct Room {
+    int roomNumber;
+    char guestName[50];
+    int isOccupied;
+};
+
+void bookRoom(struct Room *rooms, int *count) {
+    if (*count >= MAX_ROOMS) {
+        printf("Error: Maximum number of rooms booked.\n");
+        return;
+    }
+    printf("Enter guest name: ");
+    scanf("%s", rooms[*count].guestName);
+    rooms[*count].roomNumber = *count + 1;
+    rooms[*count].isOccupied = 1;
+    (*count)++;
+    printf("Room booked successfully.\n");
+}
+
+void displayRooms(struct Room *rooms, int count) {
+    printf("Rooms:\n");
+    for (int i = 0; i < count; ++i) {
+        printf("Room Number: %d, Guest Name: %s, Status: %s\n", rooms[i].roomNumber, rooms[i].guestName,
+               rooms[i].isOccupied ? "Occupied" : "Vacant");
+    }
+}
+
+int main() {
+    struct Room rooms[MAX_ROOMS];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Book Room\n2. Display Rooms\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                bookRoom(rooms, &count);
+                break;
+            case 2:
+                displayRooms(rooms, count);
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

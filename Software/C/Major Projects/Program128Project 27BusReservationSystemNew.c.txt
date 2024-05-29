@@ -1,0 +1,77 @@
+/* Program 128 | Project 27: Bus Reservation System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Passenger {
+    int ticketNumber;
+    char name[100];
+    char destination[100];
+    int seatNumber;
+};
+
+void reserveTicket(struct Passenger *passengers, int *count) {
+    printf("Enter ticket number: ");
+    scanf("%d", &passengers[*count].ticketNumber);
+    printf("Enter passenger name: ");
+    scanf("%s", passengers[*count].name);
+    printf("Enter destination: ");
+    scanf("%s", passengers[*count].destination);
+    printf("Enter seat number: ");
+    scanf("%d", &passengers[*count].seatNumber);
+    (*count)++;
+    printf("Ticket reserved successfully.\n");
+}
+
+void displayTickets(struct Passenger *passengers, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Ticket Number: %d\n", passengers[i].ticketNumber);
+        printf("Name: %s\n", passengers[i].name);
+        printf("Destination: %s\n", passengers[i].destination);
+        printf("Seat Number: %d\n", passengers[i].seatNumber);
+    }
+}
+
+void cancelTicket(struct Passenger *passengers, int count) {
+    int ticketNumber;
+    printf("Enter ticket number to cancel reservation: ");
+    scanf("%d", &ticketNumber);
+    for (int i = 0; i < count; ++i) {
+        if (passengers[i].ticketNumber == ticketNumber) {
+            for (int j = i; j < count - 1; ++j) {
+                passengers[j] = passengers[j + 1];
+            }
+            printf("Reservation cancelled successfully.\n");
+            return;
+        }
+    }
+    printf("Ticket not found.\n");
+}
+
+int main() {
+    struct Passenger passengers[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Reserve Ticket\n2. Display Tickets\n3. Cancel Ticket\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                reserveTicket(passengers, &count);
+                break;
+            case 2:
+                displayTickets(passengers, count);
+                break;
+            case 3:
+                cancelTicket(passengers, count);
+		break;
+		case 4:
+		return 0;
+		default:
+		printf("Invalid choice! Please try again.\n");
+		}
+		}
+	return 0;
+	}

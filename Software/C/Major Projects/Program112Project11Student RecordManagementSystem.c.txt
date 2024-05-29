@@ -1,0 +1,74 @@
+/* Program 112 | Project 11: Student Record Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    char name[100];
+    int rollNumber;
+    float marks;
+};
+
+void addStudent(struct Student *students, int *count) {
+    printf("Enter student name: ");
+    scanf("%s", students[*count].name);
+    printf("Enter roll number: ");
+    scanf("%d", &students[*count].rollNumber);
+    printf("Enter marks: ");
+    scanf("%f", &students[*count].marks);
+    (*count)++;
+    printf("Student added successfully.\n");
+}
+
+void displayStudents(struct Student *students, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Roll Number: %d\n", students[i].rollNumber);
+        printf("Name: %s\n", students[i].name);
+        printf("Marks: %.2f\n", students[i].marks);
+    }
+}
+
+void updateMarks(struct Student *students, int count) {
+    int rollNumber;
+    float newMarks;
+    printf("Enter roll number to update marks: ");
+    scanf("%d", &rollNumber);
+    for (int i = 0; i < count; ++i) {
+        if (students[i].rollNumber == rollNumber) {
+            printf("Enter new marks: ");
+            scanf("%f", &newMarks);
+            students[i].marks = newMarks;
+            printf("Marks updated successfully.\n");
+            return;
+        }
+    }
+    printf("Student not found.\n");
+}
+
+int main() {
+    struct Student students[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Student\n2. Display Students\n3. Update Marks\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addStudent(students, &count);
+                break;
+            case 2:
+                displayStudents(students, count);
+                break;
+            case 3:
+                updateMarks(students, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

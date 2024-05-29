@@ -1,0 +1,21 @@
+/* Program 134 | Major Project 33: Pattern Generator */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+
+void printPattern(int rows) {
+    for (int i = 1; i <= rows; ++i) {
+        for (int j = 1; j <= i; ++j) {
+            printf("%d ", j);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int rows;
+    printf("Enter the number of rows for the pattern: ");
+    scanf("%d", &rows);
+    printf("Pattern:\n");
+    printPattern(rows);
+    return 0;
+}

@@ -1,0 +1,70 @@
+/* Program 119 | Project 18: Hotel Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Room {
+    int roomNumber;
+    char guestName[100];
+    int reserved;
+};
+
+void reserveRoom(struct Room *rooms, int *count) {
+    printf("Enter room number: ");
+    scanf("%d", &rooms[*count].roomNumber);
+    printf("Enter guest name: ");
+    scanf("%s", rooms[*count].guestName);
+    rooms[*count].reserved = 1;
+    (*count)++;
+    printf("Room reserved successfully.\n");
+}
+
+void displayRooms(struct Room *rooms, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Room Number: %d\n", rooms[i].roomNumber);
+        printf("Guest Name: %s\n", rooms[i].guestName);
+        printf("Reserved: %s\n", rooms[i].reserved ? "Yes" : "No");
+    }
+}
+
+void cancelReservation(struct Room *rooms, int count) {
+    int roomNumber;
+    printf("Enter room number to cancel reservation: ");
+    scanf("%d", &roomNumber);
+    for (int i = 0; i < count; ++i) {
+        if (rooms[i].roomNumber == roomNumber && rooms[i].reserved) {
+            rooms[i].reserved = 0;
+            printf("Reservation cancelled successfully.\n");
+            return;
+        }
+    }
+    printf("Room not found or reservation already cancelled.\n");
+}
+
+int main() {
+    struct Room rooms[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Reserve Room\n2. Display Rooms\n3. Cancel Reservation\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                reserveRoom(rooms, &count);
+                break;
+            case 2:
+                displayRooms(rooms, count);
+                break;
+            case 3:
+                cancelReservation(rooms, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

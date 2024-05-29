@@ -1,0 +1,58 @@
+/* Program 131 | Major Project 30: Employee Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Employee {
+    int id;
+    char name[100];
+    char department[100];
+    float salary;
+};
+
+void addEmployee(struct Employee *employees, int *count) {
+    printf("Enter employee ID: ");
+    scanf("%d", &employees[*count].id);
+    printf("Enter employee name: ");
+    scanf("%s", employees[*count].name);
+    printf("Enter employee department: ");
+    scanf("%s", employees[*count].department);
+    printf("Enter employee salary: ");
+    scanf("%f", &employees[*count].salary);
+    (*count)++;
+    printf("Employee added successfully.\n");
+}
+
+void displayEmployees(struct Employee *employees, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Employee ID: %d\n", employees[i].id);
+        printf("Name: %s\n", employees[i].name);
+        printf("Department: %s\n", employees[i].department);
+        printf("Salary: %.2f\n", employees[i].salary);
+    }
+}
+
+int main() {
+    struct Employee employees[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Employee\n2. Display Employees\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addEmployee(employees, &count);
+                break;
+            case 2:
+                displayEmployees(employees, count);
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

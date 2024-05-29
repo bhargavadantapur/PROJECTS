@@ -1,0 +1,70 @@
+/* Program 118 | Project 17: Airline Reservation System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Flight {
+    int flightNumber;
+    char passengerName[100];
+    int reserved;
+};
+
+void reserveFlight(struct Flight *flights, int *count) {
+    printf("Enter flight number: ");
+    scanf("%d", &flights[*count].flightNumber);
+    printf("Enter passenger name: ");
+    scanf("%s", flights[*count].passengerName);
+    flights[*count].reserved = 1;
+    (*count)++;
+    printf("Flight reserved successfully.\n");
+}
+
+void displayFlights(struct Flight *flights, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Flight Number: %d\n", flights[i].flightNumber);
+        printf("Passenger Name: %s\n", flights[i].passengerName);
+        printf("Reserved: %s\n", flights[i].reserved ? "Yes" : "No");
+    }
+}
+
+void cancelReservation(struct Flight *flights, int count) {
+    int flightNumber;
+    printf("Enter flight number to cancel reservation: ");
+    scanf("%d", &flightNumber);
+    for (int i = 0; i < count; ++i) {
+        if (flights[i].flightNumber == flightNumber && flights[i].reserved) {
+            flights[i].reserved = 0;
+            printf("Reservation cancelled successfully.\n");
+            return;
+        }
+    }
+    printf("Flight not found or reservation already cancelled.\n");
+}
+
+int main() {
+    struct Flight flights[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Reserve Flight\n2. Display Flights\n3. Cancel Reservation\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                reserveFlight(flights, &count);
+                break;
+            case 2:
+                displayFlights(flights, count);
+                break;
+            case 3:
+                cancelReservation(flights, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

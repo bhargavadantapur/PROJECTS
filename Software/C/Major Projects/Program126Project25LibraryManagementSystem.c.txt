@@ -1,0 +1,74 @@
+/* Program 126 | Project 25: Library Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Book {
+    int id;
+    char title[100];
+    char author[100];
+    int available;
+};
+
+void addBook(struct Book *books, int *count) {
+    printf("Enter book ID: ");
+    scanf("%d", &books[*count].id);
+    printf("Enter book title: ");
+    scanf("%s", books[*count].title);
+    printf("Enter book author: ");
+    scanf("%s", books[*count].author);
+    books[*count].available = 1;
+    (*count)++;
+    printf("Book added successfully.\n");
+}
+
+void displayBooks(struct Book *books, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Book ID: %d\n", books[i].id);
+        printf("Title: %s\n", books[i].title);
+        printf("Author: %s\n", books[i].author);
+        printf("Available: %s\n", books[i].available ? "Yes" : "No");
+    }
+}
+
+void updateAvailability(struct Book *books, int count) {
+    int id;
+    printf("Enter book ID to update availability: ");
+    scanf("%d", &id);
+    for (int i = 0; i < count; ++i) {
+        if (books[i].id == id) {
+            books[i].available = !books[i].available;
+            printf("Availability updated successfully.\n");
+            return;
+        }
+    }
+    printf("Book not found.\n");
+}
+
+int main() {
+    struct Book books[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Book\n2. Display Books\n3. Update Availability\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addBook(books, &count);
+                break;
+            case 2:
+                displayBooks(books, count);
+                break;
+            case 3:
+                updateAvailability(books, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

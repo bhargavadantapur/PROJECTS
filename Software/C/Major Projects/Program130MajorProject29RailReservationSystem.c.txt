@@ -1,0 +1,42 @@
+/* Program 130 | Major Project 29: Rail Reservation System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Train {
+    int trainNumber;
+    char source[100];
+    char destination[100];
+    int seatsAvailable;
+};
+
+void bookTicket(struct Train *trains, int count) {
+    int trainNumber;
+    printf("Enter train number: ");
+    scanf("%d", &trainNumber);
+    for (int i = 0; i < count; ++i) {
+        if (trains[i].trainNumber == trainNumber) {
+            if (trains[i].seatsAvailable > 0) {
+                trains[i].seatsAvailable--;
+                printf("Ticket booked successfully.\n");
+            } else {
+                printf("No seats available.\n");
+            }
+            return;
+        }
+    }
+    printf("Train not found.\n");
+}
+
+void displayTrains(struct Train *trains, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Train Number: %d\n", trains[i].trainNumber);
+        printf("Source: %s\n", trains[i].source);
+        printf("Destination: %s\n", trains[i].destination);
+        printf("Seats Available: %d\n", trains[i].seatsAvailable);
+    }
+}
+
+int main() {
+    struct Train trains[100] = {
+        {101, "New York", "Los Angeles", 

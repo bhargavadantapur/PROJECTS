@@ -1,0 +1,88 @@
+/* Program 127 | Project 26: Inventory Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Item {
+    int id;
+    char name[100];
+    int quantity;
+    float price;
+};
+
+void addItem(struct Item *items, int *count) {
+    printf("Enter item ID: ");
+    scanf("%d", &items[*count].id);
+    printf("Enter item name: ");
+    scanf("%s", items[*count].name);
+    printf("Enter item quantity: ");
+    scanf("%d", &items[*count].quantity);
+    printf("Enter item price: ");
+    scanf("%f", &items[*count].price);
+    (*count)++;
+    printf("Item added successfully.\n");
+}
+
+void displayItems(struct Item *items, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Item ID: %d\n", items[i].id);
+        printf("Name: %s\n", items[i].name);
+        printf("Quantity: %d\n", items[i].quantity);
+        printf("Price: %.2f\n", items[i].price);
+    }
+}
+
+void updateQuantity(struct Item *items, int count) {
+    int id, quantity;
+    printf("Enter item ID to update quantity: ");
+    scanf("%d", &id);
+    for (int i = 0; i < count; ++i) {
+        if (items[i].id == id) {
+            printf("Enter new quantity: ");
+            scanf("%d", &quantity);
+            items[i].quantity = quantity;
+            printf("Quantity updated successfully.\n");
+            return;
+        }
+    }
+    printf("Item not found.\n");
+}
+
+void calculateInventoryValue(struct Item *items, int count) {
+    float totalValue = 0;
+    for (int i = 0; i < count; ++i) {
+        totalValue += items[i].price * items[i].quantity;
+    }
+    printf("Total inventory value: %.2f\n", totalValue);
+}
+
+int main() {
+    struct Item items[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Item\n2. Display Items\n3. Update Quantity\n4. Calculate Inventory Value\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addItem(items, &count);
+                break;
+            case 2:
+                displayItems(items, count);
+                break;
+            case 3:
+                updateQuantity(items, count);
+                break;
+            case 4:
+                calculateInventoryValue(items, count);
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

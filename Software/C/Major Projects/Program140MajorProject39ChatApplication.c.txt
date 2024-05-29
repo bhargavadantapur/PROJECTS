@@ -1,0 +1,61 @@
+/* Program 140 | Major Project 39: Chat Application */
+/* This program implements a simple chat application between multiple users */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_MESSAGES 100
+#define MAX_LENGTH 200
+
+struct Message {
+    char sender[50];
+    char text[MAX_LENGTH];
+};
+
+void sendMessage(struct Message *messages, int *count) {
+    if (*count >= MAX_MESSAGES) {
+        printf("Error: Maximum number of messages reached.\n");
+        return;
+    }
+    printf("Enter sender's name: ");
+    scanf("%s", messages[*count].sender);
+    printf("Enter message: ");
+    getchar(); // Consume newline character from previous scanf
+    fgets(messages[*count].text, MAX_LENGTH, stdin);
+    (*count)++;
+    printf("Message sent successfully.\n");
+}
+
+void displayMessages(struct Message *messages, int count) {
+    printf("Messages:\n");
+    for (int i = 0; i < count; ++i) {
+        printf("Sender: %s\n", messages[i].sender);
+        printf("Message: %s\n", messages[i].text);
+    }
+}
+
+int main() {
+    struct Message messages[MAX_MESSAGES];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Send Message\n2. Display Messages\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                sendMessage(messages, &count);
+                break;
+            case 2:
+                displayMessages(messages, count);
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

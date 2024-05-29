@@ -1,0 +1,84 @@
+/* Program 115 | Project 14: Library Book Catalog */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Book {
+    int id;
+    char title[100];
+    char author[100];
+    int year;
+};
+
+void addBook(struct Book *books, int *count) {
+    printf("Enter book ID: ");
+    scanf("%d", &books[*count].id);
+    printf("Enter book title: ");
+    scanf("%s", books[*count].title);
+    printf("Enter book author: ");
+    scanf("%s", books[*count].author);
+    printf("Enter year of publication: ");
+    scanf("%d", &books[*count].year);
+    (*count)++;
+    printf("Book added successfully.\n");
+}
+
+void displayBooks(struct Book *books, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Book ID: %d\n", books[i].id);
+        printf("Title: %s\n", books[i].title);
+        printf("Author: %s\n", books[i].author);
+        printf("Year: %d\n", books[i].year);
+    }
+}
+
+void updateBook(struct Book *books, int count) {
+    int id, year;
+    char title[100], author[100];
+    printf("Enter book ID to update: ");
+    scanf("%d", &id);
+    for (int i = 0; i < count; ++i) {
+        if (books[i].id == id) {
+            printf("Enter new title: ");
+            scanf("%s", title);
+            printf("Enter new author: ");
+            scanf("%s", author);
+            printf("Enter new year of publication: ");
+            scanf("%d", &year);
+            strcpy(books[i].title, title);
+            strcpy(books[i].author, author);
+            books[i].year = year;
+            printf("Book updated successfully.\n");
+            return;
+        }
+    }
+    printf("Book not found.\n");
+}
+
+int main() {
+    struct Book books[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Book\n2. Display Books\n3. Update Book\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addBook(books, &count);
+                break;
+            case 2:
+                displayBooks(books, count);
+                break;
+            case 3:
+                updateBook(books, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

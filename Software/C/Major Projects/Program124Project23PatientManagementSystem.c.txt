@@ -1,0 +1,78 @@
+/* Program 124 | Project 23: Patient Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Patient {
+    int id;
+    char name[100];
+    char disease[100];
+    char doctor[100];
+};
+
+void addPatient(struct Patient *patients, int *count) {
+    printf("Enter patient ID: ");
+    scanf("%d", &patients[*count].id);
+    printf("Enter patient name: ");
+    scanf("%s", patients[*count].name);
+    printf("Enter disease: ");
+    scanf("%s", patients[*count].disease);
+    printf("Enter doctor's name: ");
+    scanf("%s", patients[*count].doctor);
+    (*count)++;
+    printf("Patient added successfully.\n");
+}
+
+void displayPatients(struct Patient *patients, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Patient ID: %d\n", patients[i].id);
+        printf("Name: %s\n", patients[i].name);
+        printf("Disease: %s\n", patients[i].disease);
+        printf("Doctor: %s\n", patients[i].doctor);
+    }
+}
+
+void updateDisease(struct Patient *patients, int count) {
+    int id;
+    char disease[100];
+    printf("Enter patient ID to update disease: ");
+    scanf("%d", &id);
+    for (int i = 0; i < count; ++i) {
+        if (patients[i].id == id) {
+            printf("Enter new disease: ");
+            scanf("%s", disease);
+            strcpy(patients[i].disease, disease);
+            printf("Disease updated successfully.\n");
+            return;
+        }
+    }
+    printf("Patient not found.\n");
+}
+
+int main() {
+    struct Patient patients[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Patient\n2. Display Patients\n3. Update Disease\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addPatient(patients, &count);
+                break;
+            case 2:
+                displayPatients(patients, count);
+                break;
+            case 3:
+                updateDisease(patients, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

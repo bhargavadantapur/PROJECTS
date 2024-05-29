@@ -1,0 +1,70 @@
+/* Program 120 | Project 19: Parking Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Vehicle {
+    char licensePlate[20];
+    char ownerName[100];
+    int parked;
+};
+
+void addVehicle(struct Vehicle *vehicles, int *count) {
+    printf("Enter license plate: ");
+    scanf("%s", vehicles[*count].licensePlate);
+    printf("Enter owner name: ");
+    scanf("%s", vehicles[*count].ownerName);
+    vehicles[*count].parked = 1;
+    (*count)++;
+    printf("Vehicle added successfully.\n");
+}
+
+void displayVehicles(struct Vehicle *vehicles, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("License Plate: %s\n", vehicles[i].licensePlate);
+        printf("Owner Name: %s\n", vehicles[i].ownerName);
+        printf("Parked: %s\n", vehicles[i].parked ? "Yes" : "No");
+    }
+}
+
+void removeVehicle(struct Vehicle *vehicles, int count) {
+    char licensePlate[20];
+    printf("Enter license plate to remove vehicle: ");
+    scanf("%s", licensePlate);
+    for (int i = 0; i < count; ++i) {
+        if (strcmp(vehicles[i].licensePlate, licensePlate) == 0 && vehicles[i].parked) {
+            vehicles[i].parked = 0;
+            printf("Vehicle removed successfully.\n");
+            return;
+        }
+    }
+    printf("Vehicle not found or already removed.\n");
+}
+
+int main() {
+    struct Vehicle vehicles[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Vehicle\n2. Display Vehicles\n3. Remove Vehicle\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addVehicle(vehicles, &count);
+                break;
+            case 2:
+                displayVehicles(vehicles, count);
+                break;
+            case 3:
+                removeVehicle(vehicles, count);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

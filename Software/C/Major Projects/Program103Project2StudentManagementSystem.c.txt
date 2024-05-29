@@ -1,0 +1,53 @@
+/* Program 103 | Project 2: Student Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    char name[100];
+    int rollNumber;
+    float marks;
+};
+
+void addStudent(struct Student *student) {
+    printf("Enter student name: ");
+    scanf("%s", student->name);
+    printf("Enter roll number: ");
+    scanf("%d", &student->rollNumber);
+    printf("Enter marks: ");
+    scanf("%f", &student->marks);
+}
+
+void displayStudent(struct Student *student) {
+    printf("Student Name: %s\n", student->name);
+    printf("Roll Number: %d\n", student->rollNumber);
+    printf("Marks: %.2f\n", student->marks);
+}
+
+int main() {
+    struct Student students[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Student\n2. Display Students\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addStudent(&students[count]);
+                count++;
+                break;
+            case 2:
+                for (int i = 0; i < count; ++i) {
+                    displayStudent(&students[i]);
+                }
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

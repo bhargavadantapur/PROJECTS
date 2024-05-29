@@ -1,0 +1,94 @@
+/* Program 113 | Project 12: Payroll Management System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Employee {
+    char name[100];
+    int id;
+    float salary;
+    float hoursWorked;
+};
+
+void addEmployee(struct Employee *employees, int *count) {
+    printf("Enter employee name: ");
+    scanf("%s", employees[*count].name);
+    printf("Enter employee ID: ");
+    scanf("%d", &employees[*count].id);
+    printf("Enter employee salary: ");
+    scanf("%f", &employees[*count].salary);
+    employees[*count].hoursWorked = 0;
+    (*count)++;
+    printf("Employee added successfully.\n");
+}
+
+void displayEmployees(struct Employee *employees, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Employee ID: %d\n", employees[i].id);
+        printf("Name: %s\n", employees[i].name);
+        printf("Salary: %.2f\n", employees[i].salary);
+        printf("Hours Worked: %.2f\n", employees[i].hoursWorked);
+    }
+}
+
+void updateHours(struct Employee *employees, int count) {
+    int id;
+    float hours;
+    printf("Enter employee ID to update hours: ");
+    scanf("%d", &id);
+    for (int i = 0; i < count; ++i) {
+        if (employees[i].id == id) {
+            printf("Enter hours worked: ");
+            scanf("%f", &hours);
+            employees[i].hoursWorked += hours;
+            printf("Hours updated successfully.\n");
+            return;
+        }
+    }
+    printf("Employee not found.\n");
+}
+
+void calculatePayroll(struct Employee *employees, int count) {
+    int id;
+    printf("Enter employee ID to calculate payroll: ");
+    scanf("%d", &id);
+    for (int i = 0; i < count; ++i) {
+        if (employees[i].id == id) {
+            float payroll = employees[i].salary * employees[i].hoursWorked;
+            printf("Total payroll for %s: %.2f\n", employees[i].name, payroll);
+            return;
+        }
+    }
+    printf("Employee not found.\n");
+}
+
+int main() {
+    struct Employee employees[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Employee\n2. Display Employees\n3. Update Hours\n4. Calculate Payroll\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addEmployee(employees, &count);
+                break;
+            case 2:
+                displayEmployees(employees, count);
+                break;
+            case 3:
+                updateHours(employees, count);
+                break;
+            case 4:
+                calculatePayroll(employees, count);
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

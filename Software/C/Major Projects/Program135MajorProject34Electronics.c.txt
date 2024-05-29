@@ -1,0 +1,47 @@
+/* Program 135 | Major Project 34: Electronics Related */
+/* This program simulates a simple calculator for electronic circuits */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+
+int main() {
+    float voltage, resistance, current;
+    int choice;
+
+    while (1) {
+        printf("\n1. Calculate Current (I)\n2. Calculate Voltage (V)\n3. Calculate Resistance (R)\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter voltage (V): ");
+                scanf("%f", &voltage);
+                printf("Enter resistance (R): ");
+                scanf("%f", &resistance);
+                current = voltage / resistance;
+                printf("Current (I) = %.2f A\n", current);
+                break;
+            case 2:
+                printf("Enter current (I): ");
+                scanf("%f", &current);
+                printf("Enter resistance (R): ");
+                scanf("%f", &resistance);
+                voltage = current * resistance;
+                printf("Voltage (V) = %.2f V\n", voltage);
+                break;
+            case 3:
+                printf("Enter voltage (V): ");
+                scanf("%f", &voltage);
+                printf("Enter current (I): ");
+                scanf("%f", &current);
+                resistance = voltage / current;
+                printf("Resistance (R) = %.2f Ω\n", resistance);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

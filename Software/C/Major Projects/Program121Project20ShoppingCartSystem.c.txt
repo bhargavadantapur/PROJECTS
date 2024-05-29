@@ -1,0 +1,88 @@
+/* Program 121 | Project 20: Shopping Cart System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+#include <string.h>
+
+struct Product {
+    int id;
+    char name[100];
+    float price;
+    int quantity;
+};
+
+void addProduct(struct Product *products, int *count) {
+    printf("Enter product ID: ");
+    scanf("%d", &products[*count].id);
+    printf("Enter product name: ");
+    scanf("%s", products[*count].name);
+    printf("Enter product price: ");
+    scanf("%f", &products[*count].price);
+    printf("Enter product quantity: ");
+    scanf("%d", &products[*count].quantity);
+    (*count)++;
+    printf("Product added successfully.\n");
+}
+
+void displayProducts(struct Product *products, int count) {
+    for (int i = 0; i < count; ++i) {
+        printf("Product ID: %d\n", products[i].id);
+        printf("Name: %s\n", products[i].name);
+        printf("Price: %.2f\n", products[i].price);
+        printf("Quantity: %d\n", products[i].quantity);
+    }
+}
+
+void updateQuantity(struct Product *products, int count) {
+    int id, quantity;
+    printf("Enter product ID to update quantity: ");
+    scanf("%d", &id);
+    for (int i = 0; i < count; ++i) {
+        if (products[i].id == id) {
+            printf("Enter new quantity: ");
+            scanf("%d", &quantity);
+            products[i].quantity = quantity;
+            printf("Quantity updated successfully.\n");
+            return;
+        }
+    }
+    printf("Product not found.\n");
+}
+
+void calculateTotal(struct Product *products, int count) {
+    float total = 0;
+    for (int i = 0; i < count; ++i) {
+        total += products[i].price * products[i].quantity;
+    }
+    printf("Total price of products in the cart: %.2f\n", total);
+}
+
+int main() {
+    struct Product products[100];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Product\n2. Display Products\n3. Update Quantity\n4. Calculate Total\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addProduct(products, &count);
+                break;
+            case 2:
+                displayProducts(products, count);
+                break;
+            case 3:
+                updateQuantity(products, count);
+                break;
+            case 4:
+                calculateTotal(products, count);
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

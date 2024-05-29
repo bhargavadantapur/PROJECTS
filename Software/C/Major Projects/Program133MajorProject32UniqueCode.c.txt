@@ -1,0 +1,10 @@
+/* Program 133 | Major Project 32: Unique Code */
+/* This program generates a unique code that no one else has written till date */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+/*couldn't complete due to errors in code, will fix that*/
+#include <stdio.h>
+
+int main() {
+    printf("This is a unique code that no one else has written till date!\n");
+    return 0;
+}

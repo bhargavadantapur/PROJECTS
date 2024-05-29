@@ -1,0 +1,61 @@
+/* Program 139 | Major Project 38: Inventory Tracking System */
+/* This program tracks inventory levels, orders, and sales for a business */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_PRODUCTS 50
+
+struct Product {
+    char name[50];
+    int quantity;
+    float price;
+};
+
+void addProduct(struct Product *products, int *count) {
+    if (*count >= MAX_PRODUCTS) {
+        printf("Error: Maximum number of products reached.\n");
+        return;
+    }
+    printf("Enter product name: ");
+    scanf("%s", products[*count].name);
+    printf("Enter product quantity: ");
+    scanf("%d", &products[*count].quantity);
+    printf("Enter product price: ");
+    scanf("%f", &products[*count].price);
+    (*count)++;
+    printf("Product added successfully.\n");
+}
+
+void displayProducts(struct Product *products, int count) {
+    printf("Products:\n");
+    for (int i = 0; i < count; ++i) {
+        printf("Name: %s, Quantity: %d, Price: %.2f\n", products[i].name, products[i].quantity, products[i].price);
+    }
+}
+
+int main() {
+    struct Product products[MAX_PRODUCTS];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Product\n2. Display Products\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addProduct(products, &count);
+                break;
+            case 2:
+                displayProducts(products, count);
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

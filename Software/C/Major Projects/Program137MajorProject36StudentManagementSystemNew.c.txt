@@ -1,0 +1,61 @@
+/* Program 137 | Major Project 36: Student Management System */
+/* This program manages student records including their grades, attendance, etc. */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_STUDENTS 50
+
+struct Student {
+    char name[50];
+    int rollNumber;
+    float marks;
+};
+
+void addStudent(struct Student *students, int *count) {
+    if (*count >= MAX_STUDENTS) {
+        printf("Error: Maximum number of students reached.\n");
+        return;
+    }
+    printf("Enter student name: ");
+    scanf("%s", students[*count].name);
+    printf("Enter student roll number: ");
+    scanf("%d", &students[*count].rollNumber);
+    printf("Enter student marks: ");
+    scanf("%f", &students[*count].marks);
+    (*count)++;
+    printf("Student added successfully.\n");
+}
+
+void displayStudents(struct Student *students, int count) {
+    printf("Students:\n");
+    for (int i = 0; i < count; ++i) {
+        printf("Name: %s, Roll Number: %d, Marks: %.2f\n", students[i].name, students[i].rollNumber, students[i].marks);
+    }
+}
+
+int main() {
+    struct Student students[MAX_STUDENTS];
+    int choice, count = 0;
+
+    while (1) {
+        printf("\n1. Add Student\n2. Display Students\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addStudent(students, &count);
+                break;
+            case 2:
+                displayStudents(students, count);
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}

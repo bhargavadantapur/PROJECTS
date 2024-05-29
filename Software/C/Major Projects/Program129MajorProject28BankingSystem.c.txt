@@ -1,0 +1,112 @@
+/* Program 129 | Major Project 28: Banking System */
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+#include <stdio.h>
+
+// Function to check if a given account number exists
+int accountExists(int accountNumber, int *accounts, int count) {
+    for (int i = 0; i < count; ++i) {
+        if (accounts[i] == accountNumber) {
+            return 1; // Account exists
+        }
+    }
+    return 0; // Account does not exist
+}
+
+// Function to deposit money into an account
+void deposit(int accountNumber, float *balances, int *accounts, int count) {
+    float amount;
+    printf("Enter amount to deposit: ");
+    scanf("%f", &amount);
+    for (int i = 0; i < count; ++i) {
+        if (accounts[i] == accountNumber) {
+            balances[i] += amount; // Update balance
+            printf("Amount deposited successfully.\n");
+            return;
+        }
+    }
+    printf("Account not found.\n");
+}
+
+// Function to withdraw money from an account
+void withdraw(int accountNumber, float *balances, int *accounts, int count) {
+    float amount;
+    printf("Enter amount to withdraw: ");
+    scanf("%f", &amount);
+    for (int i = 0; i < count; ++i) {
+        if (accounts[i] == accountNumber) {
+            if (balances[i] >= amount) {
+                balances[i] -= amount; // Update balance
+                printf("Amount withdrawn successfully.\n");
+            } else {
+                printf("Insufficient balance.\n");
+            }
+            return;
+        }
+    }
+    printf("Account not found.\n");
+}
+
+// Function to display balance of an account
+void displayBalance(int accountNumber, float *balances, int *accounts, int count) {
+    for (int i = 0; i < count; ++i) {
+        if (accounts[i] == accountNumber) {
+            printf("Balance: %.2f\n", balances[i]);
+            return;
+        }
+    }
+    printf("Account not found.\n");
+}
+
+int main() {
+    int accounts[100]; // Array to store account numbers
+    float balances[100]; // Array to store account balances
+    int choice, accountNumber, count = 0;
+
+    while (1) {
+        printf("\n1. Create Account\n2. Deposit\n3. Withdraw\n4. Check Balance\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter account number: ");
+                scanf("%d", &accounts[count]);
+                balances[count] = 0; // Set initial balance to 0
+                count++;
+                printf("Account created successfully.\n");
+                break;
+            case 2:
+                printf("Enter account number: ");
+                scanf("%d", &accountNumber);
+                if (accountExists(accountNumber, accounts, count)) {
+                    deposit(accountNumber, balances, accounts, count);
+                } else {
+                    printf("Account not found.\n");
+                }
+                break;
+            case 3:
+                printf("Enter account number: ");
+                scanf("%d", &accountNumber);
+                if (accountExists(accountNumber, accounts, count)) {
+                    withdraw(accountNumber, balances, accounts, count);
+                } else {
+                    printf("Account not found.\n");
+                }
+                break;
+            case 4:
+                printf("Enter account number: ");
+                scanf("%d", &accountNumber);
+                if (accountExists(accountNumber, accounts, count)) {
+                    displayBalance(accountNumber, balances, accounts, count);
+                } else {
+                    printf("Account not found.\n");
+                }
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}
