@@ -1,0 +1,12 @@
+/* Program 35: Calculate Perimeter of a Circle */
+#include <stdio.h>
+#define PI 3.14159
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    double radius, perimeter;
+    printf("Enter the radius of the circle: ");
+    scanf("%lf", &radius);
+    perimeter = 2 * PI * radius;
+    printf("Perimeter of the circle: %.2lf\n", perimeter);
+    return 0;
+}

@@ -1,0 +1,18 @@
+/* Program 95: Replace Lowercase Characters with Uppercase and Vice Versa */
+#include <stdio.h>
+#include <ctype.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    char str[1000];
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+    for (int i = 0; str[i] != '\0'; ++i) {
+        if (islower(str[i])) {
+            str[i] = toupper(str[i]);
+        } else if (isupper(str[i])) {
+            str[i] = tolower(str[i]);
+        }
+    }
+    printf("String after case conversion: %s\n", str);
+    return 0;
+}

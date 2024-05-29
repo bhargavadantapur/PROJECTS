@@ -1,0 +1,11 @@
+/* Program 32: Calculate Simple Interest */
+#include <stdio.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    double principal, rate, time, interest;
+    printf("Enter principal, rate of interest and time: ");
+    scanf("%lf %lf %lf", &principal, &rate, &time);
+    interest = (principal * rate * time) / 100;
+    printf("Simple Interest: %.2lf\n", interest);
+    return 0;
+}

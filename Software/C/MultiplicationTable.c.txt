@@ -1,0 +1,12 @@
+/* Program 14: Multiplication Table */
+#include <stdio.h>
+/* Copyright (c) Bhargava Dantapur | bhargavadantapur@gmail.com */
+int main() {
+    int num;
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+    for (int i = 1; i <= 10; ++i) {
+        printf("%d * %d = %d\n", num, i, num * i);
+    }
+    return 0;
+}
